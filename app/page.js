@@ -66,7 +66,7 @@ export default function Home() {
     }
   };
 
-  const removeFoodItem = async (mealType, foodId) => {
+  const removeFoodItem = async (foodId) => {
     if (user) {
       const userMealsRef = collection(firestore, 'users', user.uid, 'meals');
       const foodDocRef = doc(userMealsRef, foodId);
@@ -77,9 +77,9 @@ export default function Home() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: '#3c096c' }}>
+      <AppBar position="static" sx={{ bgcolor: '#240046' }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" fontWeight="600" component="div" sx={{ flexGrow: 1 }}>
             Carb Tracker
           </Typography>
           <Button 
@@ -96,7 +96,10 @@ export default function Home() {
       <Box 
         width="100%" 
         minHeight="calc(100vh - 64px)" 
-        bgcolor='#240046' 
+        bgcolor='transparent' 
+        sx={{ 
+          background: 'linear-gradient(to top right, #240046, #9d4edd)'
+        }}
         display="flex" 
         flexDirection="column" 
         justifyContent="center" 

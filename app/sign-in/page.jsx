@@ -28,7 +28,13 @@ const SignIn = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#240046', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+    <Box 
+      bgcolor='transparent' 
+      minHeight='100vh' 
+      display='flex' 
+      alignItems= 'center' 
+      sx={{background: 'linear-gradient(to top right, #240046, #9d4edd)'}}
+    >
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -100,7 +106,7 @@ const SignIn = () => {
           </Box>
         </Box>
       </Container>
-    </div>
+    </Box>
   );
 };
 
