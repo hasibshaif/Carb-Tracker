@@ -50,13 +50,13 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
             display="flex" 
             flexDirection="column" 
             alignItems="center" 
-            width={350}
-            height={700}
+            width={400}
             gap={2} 
-            border="2px solid black" 
+            border="4px solid #6b2a00" 
             boxShadow={20} 
             p={5}
-            overflow="auto"
+            borderRadius={10}
+            bgcolor='#e2d9ff'
         >
             <Typography variant="h4">{mealType}</Typography>
             <Box component="form" onSubmit={handleSearch} display="flex" flexDirection="row" gap={2}>
@@ -68,7 +68,11 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                     onChange={handleSearchChange}
                     required
                 />
-                <Button type="submit" variant="contained">
+                <Button 
+                    sx={{ backgroundColor: '#3c00ff', '&:hover': { backgroundColor: '#1e0082' } }}
+                    type="submit" 
+                    variant="contained"
+                >
                     Add food
                 </Button>
             </Box>
@@ -88,6 +92,11 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                         </Button>
                     </Box>
                 ))}
+            </Box>
+            <Box mt={2} p={2} border={1} borderColor="grey.300" borderRadius={2} width="100%">
+                <Typography variant="h6">
+                    Total Carbs: {foods.reduce((sum, food) => sum + food.carbohydrates_total_g, 0).toFixed(2)}g
+                </Typography>
             </Box>
         </Box>
     )

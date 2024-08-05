@@ -12,7 +12,9 @@ import { MealSection } from '@/app/components/MealSection';
 
 export default function Home() {
   const [user] = useAuthState(auth);
+  const userSession = sessionStorage.getItem('user')
   const router = useRouter();
+
   const [meals, setMeals] = useState({
     breakfast: [],
     lunch: [],
@@ -42,12 +44,12 @@ export default function Home() {
   }, [user]);
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !userSession) {
       router.push('/sign-in');
     } else {
       fetchMeals();
     }
-  }, [user, router, fetchMeals]);
+  }, [user, router, fetchMeals, userSession]);
 
   const addFoodItem = async (mealType, foodItem) => {
     if (user) {
@@ -72,9 +74,20 @@ export default function Home() {
   };
 
   return (
-    <Box width="100vw" minHeight="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={2} py={4}>
+    <Box 
+      width="100vw" 
+      minHeight="100vh" 
+      bgcolor='#2e08a8' 
+      display="flex" 
+      flexDirection="column" 
+      justifyContent="center" 
+      alignItems="center" 
+      gap={2} 
+      py={4}
+    >
       <Button 
         variant="contained"
+        sx={{backgroundColor:' #ff2200', '&:hover': { backgroundColor: '#701102' }}}
         onClick={() => {
           signOut(auth);
           sessionStorage.removeItem('user');
