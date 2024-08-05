@@ -44,12 +44,15 @@ export default function Home() {
   }, [user]);
 
   useEffect(() => {
-    if (!user && !userSession) {
-      router.push('/sign-in');
-    } else {
-      fetchMeals();
+    if (typeof window !== "undefined") {
+      const userSession = sessionStorage.getItem('user');
+      if (!user && !userSession) {
+        router.push('/sign-in');
+      } else {
+        fetchMeals();
+      }
     }
-  }, [user, router, fetchMeals, userSession]);
+  }, [user, router, fetchMeals]);
 
   const addFoodItem = async (mealType, foodItem) => {
     if (user) {
