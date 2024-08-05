@@ -5,20 +5,17 @@ import { useState } from "react";
 
 import { API_KEY } from "../api/apiNinjas";
 
-export const MealSection = ({ mealType, addFoodItem }) => {
+export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSearchChange = async(e) => {
-        const [query, value] = e.target;
-        setSearchTerm((prevSearch) => ({
-            ...prevSearch,
-            [query]: value
-        }));
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     const handleSearch = async (e) => {
         e.preventDefault(); 
-        const query = searchTerm.query;
+        const query = searchTerm;
         try {
             const response = await fetch(`https://api.api-ninjas.com/v1/nutrition?query=${query}`, {
                 headers: {
@@ -35,37 +32,63 @@ export const MealSection = ({ mealType, addFoodItem }) => {
             if (data.length > 0) {
                 const foodItem = data[0];
                 const {name, fiber_g, sugar_g, carbohydrates_total_g} = foodItem;
-                console.log(`Food: ${name}`);
-                console.log(`Fiber: ${fiber_g}g`);
-                console.log(`Sugar: ${sugar_g}g`);
-                console.log(`Total Carbohydrates: ${carbohydrates_total_g}g`);
+                addFoodItem({name, fiber_g, sugar_g, carbohydrates_total_g});
+                setSearchTerm('');
+                setErrorMessage('');
             }
             else {
-                console.log("No food item found");
+                setErrorMessage("No food item found");
             }
         } catch (error) {
             console.error('Request failed:', error);
+            setErrorMessage(error.message);
         }
     };
 
     return (
-        <Box component="form" onSubmit={handleSearch} display="flex" flexDirection="column" alignItems="center" gap={3}>
-            <Box>
-                <Typography variant="h4">{mealType}</Typography>
-            </Box>
-            <Box display="flex" flexDirection="row" gap={2}>
+        <Box 
+            display="flex" 
+            flexDirection="column" 
+            alignItems="center" 
+            width={350}
+            height={700}
+            gap={2} 
+            border="2px solid black" 
+            boxShadow={20} 
+            p={5}
+            overflow="auto"
+        >
+            <Typography variant="h4">{mealType}</Typography>
+            <Box component="form" onSubmit={handleSearch} display="flex" flexDirection="row" gap={2}>
                 <TextField 
-                label="Search for food"
-                placeholder="Enter the food name, followed by amount" 
-                variant="outlined" 
-                value={searchTerm.query || ''} 
-                onChange={(e) => handleSearchChange({ target: ['query', e.target.value] })}
-                required
+                    label="Search for food"
+                    placeholder="Enter the food name, followed by amount" 
+                    variant="outlined" 
+                    value={searchTerm} 
+                    onChange={handleSearchChange}
+                    required
                 />
                 <Button type="submit" variant="contained">
                     Add food
                 </Button>
             </Box>
+            <Typography fontSize={12}>Type the amount of food, followed by the food name. Example: 100g rice</Typography>
+            {errorMessage && <Typography color="error">{errorMessage}</Typography>}
+            <Box>
+                {foods.map((food) => (
+                    <Box key={food.id} mt={2} p={2} border={1} borderColor="grey.300" borderRadius={2} display="flex" justifyContent="space-between" alignItems="center">
+                        <Box>
+                            <Typography variant="h6">{food.name}</Typography>
+                            <Typography>Fiber: {food.fiber_g}g</Typography>
+                            <Typography>Sugar: {food.sugar_g}g</Typography>
+                            <Typography>Total Carbs: {food.carbohydrates_total_g}g</Typography>
+                        </Box>
+                        <Button variant="text" color="error" onClick={() => removeFoodItem(mealType, food.id)}>
+                            <Typography fontWeight="bold">X</Typography>
+                        </Button>
+                    </Box>
+                ))}
+            </Box>
         </Box>
     )
-} 
+}
