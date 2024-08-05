@@ -76,7 +76,7 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                     Add food
                 </Button>
             </Box>
-            <Typography fontSize={12} color="#3c096c">Type the amount of food, followed by the food name. Example: "100g rice"</Typography>
+            <Typography fontSize={12} color="#3c096c">Type the amount of food, followed by the food name. Example: &quot;100g rice&quot;</Typography>
             {errorMessage && <Typography color="error">{errorMessage}</Typography>}
             <Box display="flex" flexDirection="row" gap={2} flexWrap="wrap">
                 {foods.map((food) => (

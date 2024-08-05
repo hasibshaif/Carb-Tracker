@@ -91,7 +91,7 @@ const SignIn = () => {
             {error && <Typography color="error">{error.message}</Typography>}
             <Box mt={2}>
               <Typography variant="body2">
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href="/sign-up" variant="body2" color="#ff9100">
                   Sign up
                 </Link>
