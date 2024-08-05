@@ -1,20 +1,10 @@
 'use client'
 
 import { useState } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Container, CssBaseline, Box, TextField, Button, Typography, Link } from '@mui/material';
+import { Container, Box, TextField, Button, Typography, Link } from '@mui/material';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/firebaseConfig';
 import { useRouter } from 'next/navigation';
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#2e08a8',
-    },
-  },
-});
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -38,18 +28,19 @@ const SignIn = () => {
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <div style={{ backgroundColor: '#240046', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: '#ffdac7',
+            padding: 3,
+            borderRadius: 2,
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color="#3c096c" fontWeight={550}>
             Sign In
           </Typography>
           <Box component="form" onSubmit={handleSignin} sx={{ mt: 3 }}>
@@ -83,8 +74,16 @@ const SignIn = () => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 3, 
+                mb: 2, 
+                backgroundColor: '#ff9e00', 
+                color: '#9d4edd', 
+                fontWeight: 900, 
+                '&:hover': { 
+                  backgroundColor: '#9d4edd', 
+                  color: '#ff9e00'
+                }}}
               disabled={loading}
             >
               Sign In
@@ -93,7 +92,7 @@ const SignIn = () => {
             <Box mt={2}>
               <Typography variant="body2">
                 Don't have an account?{' '}
-                <Link href="/sign-up" variant="body2">
+                <Link href="/sign-up" variant="body2" color="#ff9100">
                   Sign up
                 </Link>
               </Typography>
@@ -101,7 +100,7 @@ const SignIn = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </div>
   );
 };
 

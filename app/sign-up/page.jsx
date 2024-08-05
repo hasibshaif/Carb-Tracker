@@ -1,23 +1,15 @@
 'use client'
 
 import { useState } from 'react';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { Container, CssBaseline, Box, TextField, Button, Typography, Link } from '@mui/material';
+import { Container, Box, TextField, Button, Typography, Link } from '@mui/material';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/firebaseConfig';
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#90caf9',
-    },
-  },
-});
+import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const [createUserWithEmailAndPassword, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
@@ -25,27 +17,30 @@ const SignUp = () => {
     event.preventDefault();
     try {
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log({res})
+      console.log({res});
+      sessionStorage.setItem('user', true);
       setEmail('');
       setPassword('');
+      router.push('/');
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <div style={{ backgroundColor: '#240046', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: '#ffdac7',
+            padding: 3,
+            borderRadius: 2,
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color="#3c096c" fontWeight={550}>
             Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSignup} sx={{ mt: 3 }}>
@@ -79,8 +74,16 @@ const SignUp = () => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 3, 
+                mb: 2, 
+                backgroundColor: '#ff9e00', 
+                color: '#9d4edd', 
+                fontWeight: 900, 
+                '&:hover': { 
+                  backgroundColor: '#9d4edd', 
+                  color: '#ff9e00'
+                }}}
               disabled={loading}
             >
               Sign Up
@@ -89,7 +92,7 @@ const SignUp = () => {
             <Box mt={2}>
               <Typography variant="body2">
                 Already have an account?{' '}
-                <Link href="/sign-in" variant="body2">
+                <Link href="/sign-in" variant="body2" color="#ff9100">
                   Sign in
                 </Link>
               </Typography>
@@ -97,7 +100,7 @@ const SignUp = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </div>
   );
 };
 

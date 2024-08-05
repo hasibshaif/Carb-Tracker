@@ -50,51 +50,68 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
             display="flex" 
             flexDirection="column" 
             alignItems="center" 
-            width={400}
+            width={550}
+            minHeight={700}
             gap={2} 
-            border="4px solid #6b2a00" 
+            border="4px solid #ff6d00" 
             boxShadow={20} 
             p={5}
             borderRadius={10}
-            bgcolor='#e2d9ff'
+            bgcolor='#ffdac7'
         >
-            <Typography variant="h4">{mealType}</Typography>
+            <Typography variant="h4" color="#3c096c" fontWeight={550}>{mealType}</Typography>
             <Box component="form" onSubmit={handleSearch} display="flex" flexDirection="row" gap={2}>
                 <TextField 
                     label="Search for food"
-                    placeholder="Enter the food name, followed by amount" 
                     variant="outlined" 
                     value={searchTerm} 
                     onChange={handleSearchChange}
                     required
                 />
                 <Button 
-                    sx={{ backgroundColor: '#3c00ff', '&:hover': { backgroundColor: '#1e0082' } }}
+                    sx={{ backgroundColor: '#ff9e00', color: '#9d4edd', fontWeight: 900, '&:hover': { backgroundColor: '#9d4edd', color: '#ff9e00'}, borderRadius: 10 }}
                     type="submit" 
                     variant="contained"
                 >
                     Add food
                 </Button>
             </Box>
-            <Typography fontSize={12}>Type the amount of food, followed by the food name. Example: 100g rice</Typography>
+            <Typography fontSize={12} color="#3c096c">Type the amount of food, followed by the food name. Example: "100g rice"</Typography>
             {errorMessage && <Typography color="error">{errorMessage}</Typography>}
-            <Box>
+            <Box display="flex" flexDirection="row" gap={2} flexWrap="wrap">
                 {foods.map((food) => (
-                    <Box key={food.id} mt={2} p={2} border={1} borderColor="grey.300" borderRadius={2} display="flex" justifyContent="space-between" alignItems="center">
+                    <Box 
+                        key={food.id} 
+                        mt={2} 
+                        p={2} 
+                        border={1} 
+                        borderColor="#7b2cbf" 
+                        borderRadius={5} 
+                        display="flex" 
+                        justifyContent="space-between" 
+                        alignItems="center"
+                    >
                         <Box>
-                            <Typography variant="h6">{food.name}</Typography>
-                            <Typography>Fiber: {food.fiber_g}g</Typography>
-                            <Typography>Sugar: {food.sugar_g}g</Typography>
-                            <Typography>Total Carbs: {food.carbohydrates_total_g}g</Typography>
+                            <Typography fontSize={20}>{food.name.charAt(0).toUpperCase() + food.name.slice(1)}</Typography>
+                            <Typography fontSize={15}>Fiber: {food.fiber_g}g</Typography>
+                            <Typography fontSize={15}>Sugar: {food.sugar_g}g</Typography>
+                            <Typography fontSize={15}>Total Carbs: {food.carbohydrates_total_g}g</Typography>
                         </Box>
                         <Button variant="text" color="error" onClick={() => removeFoodItem(mealType, food.id)}>
-                            <Typography fontWeight="bold">X</Typography>
+                            <Typography fontWeight={1000} color="#ff8500">X</Typography>
                         </Button>
                     </Box>
                 ))}
             </Box>
-            <Box mt={2} p={2} border={1} borderColor="grey.300" borderRadius={2} width="100%">
-                <Typography variant="h6">
+            <Box 
+                mt={2} 
+                p={2} 
+                border={2} 
+                borderColor="#7b2cbf" 
+                borderRadius={10} 
+                width="100%"
+            >
+                <Typography variant="h6" color="#5a189a">
                     Total Carbs: {foods.reduce((sum, food) => sum + food.carbohydrates_total_g, 0).toFixed(2)}g
                 </Typography>
             </Box>

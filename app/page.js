@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect, useCallback } from "react";
 import { firestore } from "@/app/firebase/firebaseConfig"
-import { Box, Button, TextField, Typography } from '@mui/material';
-import { collection, doc, setDoc, getDocs, query, where, deleteDoc } from "firebase/firestore";
+import { AppBar, Toolbar, Box, Button, Typography } from '@mui/material';
+import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { auth } from '@/app/firebase/firebaseConfig'
@@ -74,31 +74,39 @@ export default function Home() {
   };
 
   return (
-    <Box 
-      width="100vw" 
-      minHeight="100vh" 
-      bgcolor='#2e08a8' 
-      display="flex" 
-      flexDirection="column" 
-      justifyContent="center" 
-      alignItems="center" 
-      gap={2} 
-      py={4}
-    >
-      <Button 
-        variant="contained"
-        sx={{backgroundColor:' #ff2200', '&:hover': { backgroundColor: '#701102' }}}
-        onClick={() => {
-          signOut(auth);
-          sessionStorage.removeItem('user');
-        }}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ bgcolor: '#ff6d00' }}>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Carb Tracker
+          </Typography>
+          <Button 
+            color="inherit"
+            onClick={() => {
+              signOut(auth);
+              sessionStorage.removeItem('user');
+            }}
+          >
+            Log Out
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Box 
+        width="100%" 
+        minHeight="calc(100vh - 64px)" 
+        bgcolor='#240046' 
+        display="flex" 
+        flexDirection="column" 
+        justifyContent="center" 
+        alignItems="center" 
+        gap={2} 
+        py={4}
       >
-        Log Out
-      </Button>
-      <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start" gap={4} flexWrap="wrap">
-        <MealSection mealType="Breakfast" addFoodItem={(foodItem) => addFoodItem('breakfast', foodItem)} removeFoodItem={removeFoodItem} foods={meals.breakfast} />
-        <MealSection mealType="Lunch" addFoodItem={(foodItem) => addFoodItem('lunch', foodItem)} removeFoodItem={removeFoodItem} foods={meals.lunch} />
-        <MealSection mealType="Dinner" addFoodItem={(foodItem) => addFoodItem('dinner', foodItem)} removeFoodItem={removeFoodItem} foods={meals.dinner} />
+        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start" gap={4} flexWrap="wrap">
+          <MealSection mealType="Breakfast" addFoodItem={(foodItem) => addFoodItem('breakfast', foodItem)} removeFoodItem={removeFoodItem} foods={meals.breakfast} />
+          <MealSection mealType="Lunch" addFoodItem={(foodItem) => addFoodItem('lunch', foodItem)} removeFoodItem={removeFoodItem} foods={meals.lunch} />
+          <MealSection mealType="Dinner" addFoodItem={(foodItem) => addFoodItem('dinner', foodItem)} removeFoodItem={removeFoodItem} foods={meals.dinner} />
+        </Box>
       </Box>
     </Box>
   );
