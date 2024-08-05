@@ -40,3 +40,4 @@ next-env.d.ts
 
 #API
 fatSecretAPI.txt
+/app/api

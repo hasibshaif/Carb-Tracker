@@ -8,7 +8,10 @@ import { signOut } from "firebase/auth";
 import { auth } from '@/app/firebase/firebaseConfig'
 import { useRouter } from "next/navigation";
 
+import {MealSection} from '@/app/components/MealSection';
+
 export default function Home() {
+
   const [user] = useAuthState(auth);
   const router = useRouter();
   const userSession = sessionStorage.getItem('user');
@@ -16,7 +19,6 @@ export default function Home() {
   if (!user && !userSession) {
     router.push('/sign-in');
   }
-
   console.log(user)
 
   const [foods, setFoods] = useState([]);
@@ -39,7 +41,7 @@ export default function Home() {
 
   const addFoods = async (food) => {
     const docRef = doc(collection(firestore, 'foods'), food);
-    const docSnap = await getDoc(docRef); // Use getDoc for a single document
+    const docSnap = await getDoc(docRef); 
 
     if (docSnap.exists()) {
       const { count } = docSnap.data();
@@ -52,7 +54,7 @@ export default function Home() {
 
   const removeFoods = async (food) => {
     const docRef = doc(collection(firestore, 'foods'), food);
-    const docSnap = await getDoc(docRef); // Use getDoc for a single document
+    const docSnap = await getDoc(docRef); 
 
     if (docSnap.exists()) {
       const { count } = docSnap.data();
@@ -61,7 +63,7 @@ export default function Home() {
       } else {
         await setDoc(docRef, { count: count - 1 });
       }
-      updateFoods(); // Update food list after removing
+      updateFoods();
     }
   }
 
@@ -73,7 +75,22 @@ export default function Home() {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box width="100vw" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={2}>
+    <Box width="100vw" height="100vh" display="flex" flexDirection="row" justifyContent="center" alignItems="center" gap={2}>
+      <Box border="1px solid #333" bgcolor="white" boxShadow={24}>
+        <Box 
+          width="500px" 
+          height="200px" 
+          variant="outlined" 
+          display="flex" 
+          justifyContent="center" 
+          alignItems="center"
+        >
+          <MealSection mealType={"Breakfast"}></MealSection>
+        </Box> 
+        <Stack width="400px" height="300px" spacing={2} overflow="auto">
+          
+        </Stack>
+      </Box>
       <Modal open={open} onClose={handleClose}>
         <Box 
           position="absolute" top="50%" left="50%" 
