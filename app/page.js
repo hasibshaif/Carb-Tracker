@@ -12,7 +12,6 @@ import { MealSection } from '@/app/components/MealSection';
 
 export default function Home() {
   const [user] = useAuthState(auth);
-  const userSession = sessionStorage.getItem('user')
   const router = useRouter();
 
   const [meals, setMeals] = useState({
@@ -78,7 +77,7 @@ export default function Home() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: '#ff6d00' }}>
+      <AppBar position="static" sx={{ bgcolor: '#3c096c' }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carb Tracker
