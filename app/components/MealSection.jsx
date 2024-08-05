@@ -57,7 +57,7 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
             boxShadow={20} 
             p={5}
             borderRadius={10}
-            bgcolor='#ffdac7'
+            bgcolor='white'
         >
             <Typography variant="h4" color="#3c096c" fontWeight={550}>{mealType}</Typography>
             <Box component="form" onSubmit={handleSearch} display="flex" flexDirection="row" gap={2}>
