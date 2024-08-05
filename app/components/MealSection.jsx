@@ -17,7 +17,7 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
         e.preventDefault(); 
         const query = searchTerm;
         try {
-            const response = await fetch(`https://api.api-ninjas.com/v1/nutrition?query=${query}`, {
+            const response = await fetch(`https://api.api-ninjas.com/v1/nutrition?query=${encodeURIComponent(query)}`, {
                 headers: {
                     'X-Api-Key': API_KEY
                 },
