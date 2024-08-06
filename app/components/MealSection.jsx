@@ -50,8 +50,8 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
             display="flex" 
             flexDirection="column" 
             alignItems="center" 
-            width={550}
-            minHeight={700}
+            width='100%'
+            minHeight={500}
             gap={2} 
             border="4px solid #ff6d00" 
             boxShadow={20} 

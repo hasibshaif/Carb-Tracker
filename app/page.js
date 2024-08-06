@@ -108,9 +108,9 @@ export default function Home() {
         py={4}
       >
         <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start" gap={4} flexWrap="wrap">
-          <MealSection mealType="Breakfast" addFoodItem={(foodItem) => addFoodItem('breakfast', foodItem)} removeFoodItem={removeFoodItem} foods={meals.breakfast} />
-          <MealSection mealType="Lunch" addFoodItem={(foodItem) => addFoodItem('lunch', foodItem)} removeFoodItem={removeFoodItem} foods={meals.lunch} />
-          <MealSection mealType="Dinner" addFoodItem={(foodItem) => addFoodItem('dinner', foodItem)} removeFoodItem={removeFoodItem} foods={meals.dinner} />
+          <MealSection mealType="Breakfast 🥞🍩🥐" addFoodItem={(foodItem) => addFoodItem('breakfast', foodItem)} removeFoodItem={removeFoodItem} foods={meals.breakfast} />
+          <MealSection mealType="Lunch 🍕🍚🍌" addFoodItem={(foodItem) => addFoodItem('lunch', foodItem)} removeFoodItem={removeFoodItem} foods={meals.lunch} />
+          <MealSection mealType="Dinner 🥗🍝🍰" addFoodItem={(foodItem) => addFoodItem('dinner', foodItem)} removeFoodItem={removeFoodItem} foods={meals.dinner} />
         </Box>
       </Box>
     </Box>
