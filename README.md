@@ -2,6 +2,8 @@
 
 This is a web application designed to help users track their carbohydrate intake through a user-friendly interface. The application allows users to log their meals, view nutritional information, and manage their dietary habits effectively.
 
+#### Video Demo:  <https://youtu.be/AmG6qyJ5WI4>
+
 ## Technologies Used
 
 This project was developed using the following technologies:
@@ -11,8 +13,6 @@ This project was developed using the following technologies:
 - **API Ninjas**: A third-party API used to fetch nutritional information about various food items.
 - **Material-UI (MUI)**: A React UI framework that provides pre-designed components to create a responsive and modern user interface.
 - **Vercel**: The platform used for deploying the application, ensuring fast load times and easy scalability.
-
-#### Video Demo:  <https://youtu.be/AmG6qyJ5WI4>
 
 
 ## Getting Started
