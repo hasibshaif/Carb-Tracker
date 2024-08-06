@@ -12,6 +12,9 @@ This project was developed using the following technologies:
 - **Material-UI (MUI)**: A React UI framework that provides pre-designed components to create a responsive and modern user interface.
 - **Vercel**: The platform used for deploying the application, ensuring fast load times and easy scalability.
 
+#### Video Demo:  <https://youtu.be/AmG6qyJ5WI4>
+
+
 ## Getting Started
 
 To run the development server locally, follow these steps:
