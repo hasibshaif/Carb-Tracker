@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Carb Tracker
+
+This is a web application designed to help users track their carbohydrate intake through a user-friendly interface. The application allows users to log their meals, view nutritional information, and manage their dietary habits effectively.
+
+## Technologies Used
+
+This project was developed using the following technologies:
+
+- **Next.js**: A React framework that enables server-side rendering and static site generation for building fast and scalable web applications.
+- **Firebase**: A platform that provides backend services such as authentication and Firestore for real-time database capabilities.
+- **API Ninjas**: A third-party API used to fetch nutritional information about various food items.
+- **Material-UI (MUI)**: A React UI framework that provides pre-designed components to create a responsive and modern user interface.
+- **Vercel**: The platform used for deploying the application, ensuring fast load times and easy scalability.
 
 ## Getting Started
 
-First, run the development server:
+To run the development server locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/hasibshaif/Carb-Tracker.git
+   cd carb-tracker
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Set up your environment variables:
+   Create a `.env.local` file in the root directory and add your Firebase and API Ninjas credentials:
+   ```
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   NEXT_PUBLIC_API_NINJAS_API_KEY=your_api_ninjas_key
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+5. Navigate to [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- User authentication using Firebase.
+- Meal logging with nutritional information fetched from API Ninjas.
+- Responsive design using Material-UI components.
+- Real-time updates of meal data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The application is deployed on Vercel. You can view the project at the following link:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Carb Tracker on Vercel](https://vercel.com/hasib-shaifs-projects/carb-tracker)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can also go to its domain here:
+
+- [Sign In to Carb Tracker](https://carb-tracker.vercel.app/)
+
+## Notes
+
+This project is an advanced version of the Headstarter AI 2024 Fellowship Week 2 project.
