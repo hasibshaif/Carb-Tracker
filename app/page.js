@@ -66,12 +66,12 @@ export default function Home() {
     }
   };
 
-  const removeFoodItem = async (foodId) => {
+  const removeFoodItem = async (mealType, foodId) => {
     if (user) {
-      const userMealsRef = collection(firestore, 'users', user.uid, 'meals');
-      const foodDocRef = doc(userMealsRef, foodId);
-      await deleteDoc(foodDocRef);
-      fetchMeals();
+        const userMealsRef = collection(firestore, 'users', user.uid, 'meals');
+        const foodDocRef = doc(userMealsRef, foodId);
+        await deleteDoc(foodDocRef);
+        fetchMeals();
     }
   };
 
