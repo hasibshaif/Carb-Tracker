@@ -2,8 +2,6 @@
 
 This is a web application designed to help users track their carbohydrate intake through a user-friendly interface. The application allows users to log their meals, view nutritional information, and manage their dietary habits effectively.
 
-#### Video Demo:  <https://youtu.be/AmG6qyJ5WI4>
-
 ## Technologies Used
 
 This project was developed using the following technologies:
@@ -68,4 +66,4 @@ You can also go to its domain here:
 
 ## Notes
 
-This project is an advanced version of the Headstarter AI 2024 Fellowship Week 2 project.
+This project is was as part of the Headstarter AI 2024 Fellowship Week 2 project.
