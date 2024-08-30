@@ -12,6 +12,7 @@ This project was developed using the following technologies:
 - **Material-UI (MUI)**: A React UI framework that provides pre-designed components to create a responsive and modern user interface.
 - **Vercel**: The platform used for deploying the application, ensuring fast load times and easy scalability.
 
+
 ## Getting Started
 
 To run the development server locally, follow these steps:
@@ -65,4 +66,4 @@ You can also go to its domain here:
 
 ## Notes
 
-This project is an advanced version of the Headstarter AI 2024 Fellowship Week 2 project.
+This project is was as part of the Headstarter AI 2024 Fellowship Week 2 project.
