@@ -51,11 +51,7 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
         });
     };
 
-    const handlePhotoTaken = (photo) => {
-        setPhoto(photo);
-    };
-
-    const handleVisionAPIResult = (foodName) => {
+    const handlePhotoTaken = (foodName) => {
         if (foodName !== 'Not a food') {
             fetchFoodData(foodName);
         } else {

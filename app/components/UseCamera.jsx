@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Camera } from "react-camera-pro";
 import { Button, Box } from "@mui/material";
 
@@ -13,10 +13,25 @@ const UseCamera = ({ onPhotoTaken }) => {
     const handleTakePhoto = () => {
         const photo = camera.current.takePhoto();
         setImage(photo);
-        if (onPhotoTaken) {
-            onPhotoTaken(photo);
-        }
+        sendPhotoToServer(photo);
         setIsCameraOpen(false);
+    };
+
+    const sendPhotoToServer = (photo) => {
+        fetch('/api/route', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ base64Image: photo }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.foodName) {
+                onPhotoTaken(data.foodName);
+            }
+        })
+        .catch(error => console.error('API request failed:', error));
     };
 
     const toggleFacingMode = () => {
