@@ -53,16 +53,13 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
             width='100%'
             minHeight={500}
             gap={2} 
-            border="4px solid #ff6d00" 
+            border="4px solid gray" 
             boxShadow={20} 
             p={5}
             borderRadius={10}
-            bgcolor='transparent'
-            sx={{ 
-                background: 'linear-gradient(to bottom, #240046, #3c096c)'
-              }}
+            bgcolor='white'
         >
-            <Typography variant="h4" color="#ff9e00" fontWeight={550}>{mealType}</Typography>
+            <Typography variant="h4" color="#3c096c" fontWeight={550}>{mealType}</Typography>
             <Box component="form" onSubmit={handleSearch} display="flex" flexDirection="row" gap={2}>
                 <TextField 
                     label="Search for food"
@@ -71,18 +68,18 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                     onChange={handleSearchChange}
                     required
                     InputProps={{
-                        style: { color: 'white' },
+                        style: { color: '#3c096c' },
                     }}
                     InputLabelProps={{
-                        style: { color: 'white' },
+                        style: { color: '#3c096c' },
                     }}
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             '& fieldset': {
-                                borderColor: '#ff6d00', 
+                                borderColor: '#3c096c', 
                             },
                             '&:hover fieldset': {
-                                borderColor: '#9d4edd', 
+                                borderColor: '#3c096c', 
                             },
                             '&.Mui-focused fieldset': {
                                 borderColor: '#ff9e00', 
@@ -91,14 +88,14 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                     }}
                 />
                 <Button 
-                    sx={{ backgroundColor: '#ff9e00', color: '#9d4edd', fontWeight: 900, '&:hover': { backgroundColor: '#9d4edd', color: '#ff9e00'}, borderRadius: 10 }}
+                    sx={{ backgroundColor: '#240046', color: 'white', fontWeight: 900, '&:hover': { backgroundColor: '#3c096c'}, borderRadius: 10 }}
                     type="submit" 
                     variant="contained"
                 >
                     Add food
                 </Button>
             </Box>
-            <Typography fontSize={12} color="white">Type the amount of food, followed by the food name. Example: &quot;100g rice&quot;</Typography>
+            <Typography fontSize={12} color="#240046">Type the amount of food, followed by the food name. Example: &quot;100g rice&quot;</Typography>
             {errorMessage && <Typography color="error">{errorMessage}</Typography>}
             <Box display="flex" flexDirection="row" gap={2} flexWrap="wrap">
                 {foods.map((food) => (
@@ -107,17 +104,17 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                         mt={2} 
                         p={2} 
                         border={2} 
-                        borderColor="#ff8500" 
+                        borderColor="#3c096c" 
                         borderRadius={5} 
                         display="flex" 
                         justifyContent="space-between" 
                         alignItems="center"
                     >
                         <Box>
-                            <Typography color="white" fontSize={20}>{food.name.charAt(0).toUpperCase() + food.name.slice(1)}</Typography>
-                            <Typography color="white" fontSize={15}>Fiber: {food.fiber_g}g</Typography>
-                            <Typography color="white" fontSize={15}>Sugar: {food.sugar_g}g</Typography>
-                            <Typography color="white" fontSize={15}>Total Carbs: {food.carbohydrates_total_g}g</Typography>
+                            <Typography color="#3c096c" fontSize={20}>{food.name.charAt(0).toUpperCase() + food.name.slice(1)}</Typography>
+                            <Typography color="#3c096c" fontSize={15}>Fiber: {food.fiber_g}g</Typography>
+                            <Typography color="#3c096c" fontSize={15}>Sugar: {food.sugar_g}g</Typography>
+                            <Typography color="#3c096c" fontSize={15}>Total Carbs: {food.carbohydrates_total_g}g</Typography>
                         </Box>
                         <Button variant="text" color="error" onClick={() => removeFoodItem(mealType, food.id)}>
                             <Typography fontWeight={1000} color="#e5383b">X</Typography>
@@ -129,11 +126,11 @@ export const MealSection = ({ mealType, addFoodItem, foods, removeFoodItem }) =>
                 mt={2} 
                 p={2} 
                 border={3} 
-                borderColor="#ff9100" 
+                borderColor="#3c096c" 
                 borderRadius={10} 
                 width="100%"
             >
-                <Typography variant="h6" color="white">
+                <Typography variant="h6" color="#3c096c">
                     Total Carbs: {foods.reduce((sum, food) => sum + food.carbohydrates_total_g, 0).toFixed(2)}g
                 </Typography>
             </Box>

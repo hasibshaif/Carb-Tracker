@@ -98,7 +98,7 @@ export default function Home() {
         minHeight="calc(100vh - 64px)" 
         bgcolor='transparent' 
         sx={{ 
-          background: 'linear-gradient(to top right, #240046, #9d4edd)'
+          background: 'linear-gradient(to right, #240046, #3c096c)'
         }}
         display="flex" 
         flexDirection="column" 
