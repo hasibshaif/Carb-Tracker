@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { Container, Box, TextField, Button, Typography, Link } from '@mui/material';
+import { Container, Box, TextField, Button, Typography, Link, Alert } from '@mui/material';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/firebaseConfig';
 import { useRouter } from 'next/navigation';
@@ -9,21 +9,32 @@ import { useRouter } from 'next/navigation';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [retypePassword, setRetypePassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const router = useRouter();
 
   const [createUserWithEmailAndPassword, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
   const handleSignup = async (event) => {
     event.preventDefault();
+    if (password !== retypePassword) {
+      setPasswordError('Passwords do not match');
+      return;
+    }
+
     try {
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log({res});
-      sessionStorage.setItem('user', true);
-      setEmail('');
-      setPassword('');
-      router.push('/');
+      if (res && res.user) { 
+        console.log({ res });
+        sessionStorage.setItem('user', true);
+        setEmail('');
+        setPassword('');
+        setRetypePassword('');
+        setPasswordError('');
+        router.push('/');
+      }
     } catch (e) {
-      console.error(e);
+      console.error('Failed to sign up:', e);
     }
   };
 
@@ -76,6 +87,18 @@ const SignUp = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="retype-password"
+              label="Retype Password"
+              type="password"
+              id="retype-password"
+              value={retypePassword}
+              onChange={(e) => setRetypePassword(e.target.value)}
+            />
             <Button
               type="submit"
               fullWidth
@@ -94,7 +117,13 @@ const SignUp = () => {
             >
               Sign Up
             </Button>
-            {error && <Typography color="error">{error.message}</Typography>}
+
+            {}
+            {passwordError && <Alert severity="error" sx={{ mt: 2 }}>{passwordError}</Alert>}
+
+            {}
+            {error && <Alert severity="error" sx={{ mt: 2 }}>{error.message}</Alert>}
+
             <Box mt={2}>
               <Typography variant="body2">
                 Already have an account?{' '}

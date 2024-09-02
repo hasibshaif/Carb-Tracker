@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { firestore } from "@/app/firebase/firebaseConfig"
 import { AppBar, Toolbar, Box, Button, Typography } from '@mui/material';
 import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { auth } from '@/app/firebase/firebaseConfig'
 import { useRouter } from "next/navigation";
+import { Camera } from "react-camera-pro"; 
 
 import { MealSection } from '@/app/components/MealSection';
 

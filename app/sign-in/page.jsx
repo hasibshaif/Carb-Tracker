@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { Container, Box, TextField, Button, Typography, Link } from '@mui/material';
+import { Container, Box, TextField, Button, Typography, Link, Alert } from '@mui/material';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/firebaseConfig';
 import { useRouter } from 'next/navigation';
@@ -9,31 +9,40 @@ import { useRouter } from 'next/navigation';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState(''); // Track custom login errors
 
   const [signInWithEmailAndPassword, loading, error] = useSignInWithEmailAndPassword(auth);
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSignin = async (event) => {
     event.preventDefault();
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({res});
-      sessionStorage.setItem('user', true)
-      setEmail('');
-      setPassword('');
-      router.push('/');
+
+      if (res && res.user) {
+        console.log({ res });
+        sessionStorage.setItem('user', true);
+        setEmail('');
+        setPassword('');
+        setLoginError('');
+        router.push('/');
+      } else {
+        console.error("Failed to log in: No user returned.");
+        setLoginError('Failed to log in: No user returned.');
+      }
     } catch (e) {
-      console.error(e);
+      console.error("Login error:", e.message);
+      setLoginError(e.message);
     }
   };
 
   return (
-    <Box 
-      bgcolor='transparent' 
-      minHeight='100vh' 
-      display='flex' 
-      alignItems= 'center' 
-      sx={{background: 'linear-gradient(to top right, #240046, #9d4edd)'}}
+    <Box
+      bgcolor='transparent'
+      minHeight='100vh'
+      display='flex'
+      alignItems='center'
+      sx={{ background: 'linear-gradient(to top right, #240046, #9d4edd)' }}
     >
       <Container component="main" maxWidth="xs">
         <Box
@@ -80,21 +89,29 @@ const SignIn = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ 
-                mt: 3, 
-                mb: 2, 
-                backgroundColor: '#ff9e00', 
-                color: '#9d4edd', 
-                fontWeight: 900, 
-                '&:hover': { 
-                  backgroundColor: '#9d4edd', 
-                  color: '#ff9e00'
-                }}}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#ff9e00',
+                color: '#9d4edd',
+                fontWeight: 900,
+                '&:hover': {
+                  backgroundColor: '#9d4edd',
+                  color: '#ff9e00',
+                },
+              }}
               disabled={loading}
             >
               Sign In
             </Button>
-            {error && <Typography color="error">{error.message}</Typography>}
+
+            {/* Error Message Display */}
+            {(loginError || error) && (
+              <Alert severity="error" sx={{ mt: 2 }}>
+                {loginError || error.message}
+              </Alert>
+            )}
+
             <Box mt={2}>
               <Typography variant="body2">
                 Don&apos;t have an account?{' '}
